@@ -54,6 +54,7 @@
 .black_key:nth-of-type(3),
 .black_key:nth-of-type(7),
 .black_key:nth-of-type(11),
-.black_key:nth-of-type(14) {
+.black_key:nth-of-type(14),
+.black_key:nth-of-type(15) {
   opacity: 0;
 }
