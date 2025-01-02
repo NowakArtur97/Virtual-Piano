@@ -1,0 +1,52 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+
+  background-color: blanchedalmond;
+}
+
+.piano {
+  position: relative;
+  display: flex;
+  min-height: 180px;
+  min-width: 360px;
+  background-color: black;
+}
+
+.white_keys {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.white_key {
+  height: 100%;
+  width: 6%;
+
+  background-color: white;
+}
+
+.black_keys {
+  position: absolute;
+  left: 3%;
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+.black_key {
+  height: 50%;
+  width: 6%;
+  background-color: black;
+}
