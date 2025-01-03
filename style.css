@@ -52,15 +52,20 @@
 }
 
 .black_key {
-  /* height: 50%; */
   width: 6%;
-  background-color: hsl(0, 0%, 0%);
+  background-color: hsl(0, 0%, 15%);
+  border: 1px solid hsl(0, 0%, 0%);
+  border-width: 0px 3px 4.5px;
+  border-bottom-color: hsl(0, 0%, 30%);
+  border-radius: 0px 0px 3px 3px;
 
-  transition: 0.5s background-color;
+  transition: 0.5s;
 }
 
 .black_key:hover {
   background-color: hsl(0, 0%, 50%);
+  border-color: hsl(0, 0%, 35%);
+  border-bottom-color: hsl(0, 0%, 65%);
 }
 
 .black_key:nth-of-type(3),
@@ -89,5 +94,10 @@
   .piano {
     height: 420px;
     width: 840px;
+  }
+
+  .black_key {
+    border-width: 0px 6px 9px;
+    border-radius: 0px 0px 10px 10px;
   }
 }
