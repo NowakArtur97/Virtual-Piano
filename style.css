@@ -38,10 +38,15 @@
   border-radius: 0px 0px 3px 3px;
 
   transition: 0.5s;
+  transform-origin: top;
 }
 
 .white_key:hover {
   background-color: hsl(0, 0%, 50%);
+}
+
+.white_key:active {
+  transform: scaleY(98%);
 }
 
 .black_keys {
@@ -62,12 +67,19 @@
   border-radius: 0px 0px 3px 3px;
 
   transition: 0.5s;
+  transform: scaleY(100%);
+  transform-origin: top;
 }
 
 .black_key:hover {
   background-color: hsl(0, 0%, 50%);
   border-color: hsl(0, 0%, 35%);
   border-bottom-color: hsl(0, 0%, 65%);
+}
+
+.black_key:active {
+  border-bottom-width: 4px;
+  transform: scaleY(98%);
 }
 
 .black_key:nth-of-type(3),
@@ -102,5 +114,9 @@
   .black_key {
     border-width: 0px 6px 9px;
     border-radius: 0px 0px 10px 10px;
+  }
+
+  .black_key:active {
+    border-bottom-width: 8px;
   }
 }
