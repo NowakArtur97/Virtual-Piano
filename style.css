@@ -34,8 +34,10 @@
   width: 6%;
 
   background-color: hsl(0, 0%, 100%);
+  border-width: 0px 3px 4.5px;
+  border-radius: 0px 0px 3px 3px;
 
-  transition: 0.5s background-color;
+  transition: 0.5s;
 }
 
 .white_key:hover {
@@ -92,10 +94,11 @@
 
 @media (min-width: 1024px) {
   .piano {
-    height: 420px;
-    width: 840px;
+    height: 480px;
+    width: 960px;
   }
 
+  .white_key,
   .black_key {
     border-width: 0px 6px 9px;
     border-radius: 0px 0px 10px 10px;
