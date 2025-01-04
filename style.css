@@ -41,11 +41,13 @@
   transform-origin: top;
 }
 
-.white_key:hover {
+.white_key:hover,
+.white_key--hover {
   background-color: hsl(0, 0%, 50%);
 }
 
-.white_key:active {
+.white_key:active,
+.white_key--active {
   transform: scaleY(98%);
 }
 
@@ -70,13 +72,15 @@
   transform-origin: top;
 }
 
-.black_key:hover {
+.black_key:hover,
+.black_key--hover {
   background-color: hsl(0, 0%, 50%);
   border-color: hsl(0, 0%, 35%);
   border-bottom-color: hsl(0, 0%, 65%);
 }
 
-.black_key:active {
+.black_key:active,
+.black_key--active {
   border-bottom-width: 4px;
   transform: scaleY(98%);
 }
@@ -115,7 +119,8 @@
     border-radius: 0px 0px 10px 10px;
   }
 
-  .black_key:active {
+  .black_key:active,
+  .black_key--active {
     border-bottom-width: 8px;
   }
 }

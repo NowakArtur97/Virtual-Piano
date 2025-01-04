@@ -5,9 +5,20 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!element) return;
     const audio = document.querySelector(`audio[data-key="${key}"]`);
     if (!audio) return;
+    handleAnimation(element);
     audio.pause();
     audio.currentTime = 0;
     audio.play();
+  }
+
+  function handleAnimation(keyElement) {
+    const keyColorClass = keyElement.classList[0];
+    keyElement.classList.add(`${keyColorClass}--active`);
+    keyElement.classList.add(`${keyColorClass}--hover`);
+    setTimeout(() => {
+      keyElement.classList.remove(`${keyColorClass}--active`);
+      keyElement.classList.remove(`${keyColorClass}--hover`);
+    }, 500);
   }
 
   document.addEventListener("keydown", play);
