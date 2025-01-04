@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   function play(event) {
-    const keyCode = event.keyCode;
-    const element = document.querySelector(`[data-key="${keyCode}"]`);
+    const key = event.key;
+    const element = document.querySelector(`[data-key="${key}"]`);
     if (!element) return;
-    const audio = document.querySelector(`audio[data-key="${keyCode}"]`);
+    const audio = document.querySelector(`audio[data-key="${key}"]`);
     if (!audio) return;
     audio.pause();
     audio.currentTime = 0;
