@@ -76,13 +76,13 @@ html {
   background-color: hsl(0, 0%, 50%);
 }
 
-.white_key:active,
-.white_key--active {
-  transform: scaleY(98%);
-}
-
 .key_hint--white {
   color: hsl(0, 0%, 0%);
+}
+
+.white_key:hover .key_hint--white,
+.white_key--hover .key_hint--white {
+  color: hsl(0, 0%, 50%);
 }
 
 .black_keys {
@@ -121,6 +121,11 @@ html {
 
 .key_hint--black {
   color: hsl(0, 0%, 100%);
+}
+
+.black_key:hover .key_hint--black,
+.black_key--hover .key_hint--black {
+  color: hsl(0, 0%, 50%);
 }
 
 @media (min-width: 540px) {
