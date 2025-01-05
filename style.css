@@ -4,6 +4,11 @@
   padding: 0;
 }
 
+html {
+  font-size: 10px;
+  font-family: "Open Sans", Arial, sans-serif;
+}
+
 .container {
   display: flex;
   justify-content: center;
@@ -29,8 +34,21 @@
 }
 
 .key {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 1%;
+
+  border-width: 0px 3px 4.5px;
+  border-radius: 0px 0px 3px 3px;
+
   transition: 0.5s;
   transform-origin: top;
+}
+
+.key_hint {
+  font-size: 1em;
 }
 
 .white_keys {
@@ -42,8 +60,6 @@
   width: 6%;
 
   background-color: hsl(0, 0%, 100%);
-  border-width: 0px 3px 4.5px;
-  border-radius: 0px 0px 3px 3px;
 }
 
 .white_key:hover,
@@ -70,9 +86,7 @@
   width: 6%;
   background-color: hsl(0, 0%, 15%);
   border: 1px solid hsl(0, 0%, 0%);
-  border-width: 0px 3px 4.5px;
   border-bottom-color: hsl(0, 0%, 30%);
-  border-radius: 0px 0px 3px 3px;
 }
 
 .black_key:hover,
@@ -112,12 +126,20 @@
     height: 320px;
     width: 640px;
   }
+
+  .key_hint {
+    font-size: 1.5em;
+  }
 }
 
 @media (min-width: 1024px) {
   .piano {
     height: 480px;
     width: 960px;
+  }
+
+  .key_hint {
+    font-size: 2em;
   }
 
   .white_key,
