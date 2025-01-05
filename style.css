@@ -48,7 +48,16 @@ html {
 }
 
 .key_hint {
+  opacity: 0;
   font-size: 1em;
+
+  transition: 0.5s;
+  transform: translateY(-50%);
+}
+
+.piano:hover .key_hint {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .white_keys {
