@@ -22,11 +22,14 @@
   background-color: hsl(0, 0%, 0%);
 }
 
-.white_keys {
+.keys {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   width: 100%;
+}
+
+.white_keys {
+  align-items: center;
 }
 
 .white_key {
@@ -51,13 +54,14 @@
   transform: scaleY(98%);
 }
 
+.key_hint--white {
+  color: hsl(0, 0%, 0%);
+}
+
 .black_keys {
   position: absolute;
   left: 3.5%;
-  display: flex;
-  justify-content: space-between;
   height: 50%;
-  width: 100%;
 }
 
 .black_key {
@@ -91,6 +95,10 @@
 .black_key:nth-of-type(14),
 .black_key:nth-of-type(15) {
   opacity: 0;
+}
+
+.key_hint--black {
+  color: hsl(0, 0%, 100%);
 }
 
 @media (min-width: 540px) {
