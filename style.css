@@ -28,6 +28,11 @@
   width: 100%;
 }
 
+.key {
+  transition: 0.5s;
+  transform-origin: top;
+}
+
 .white_keys {
   align-items: center;
 }
@@ -39,9 +44,6 @@
   background-color: hsl(0, 0%, 100%);
   border-width: 0px 3px 4.5px;
   border-radius: 0px 0px 3px 3px;
-
-  transition: 0.5s;
-  transform-origin: top;
 }
 
 .white_key:hover,
@@ -71,9 +73,6 @@
   border-width: 0px 3px 4.5px;
   border-bottom-color: hsl(0, 0%, 30%);
   border-radius: 0px 0px 3px 3px;
-
-  transition: 0.5s;
-  transform-origin: top;
 }
 
 .black_key:hover,
