@@ -60,6 +60,17 @@ html {
   transform: translateY(0);
 }
 
+.key:hover .key_hint,
+.key--hover .key_hint {
+  color: hsl(0, 0%, 50%);
+}
+
+.key:active .key_hint,
+.key--active .key_hint {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .white_keys {
   align-items: center;
 }
@@ -78,11 +89,6 @@ html {
 
 .key_hint--white {
   color: hsl(0, 0%, 0%);
-}
-
-.white_key:hover .key_hint--white,
-.white_key--hover .key_hint--white {
-  color: hsl(0, 0%, 50%);
 }
 
 .black_keys {
@@ -121,11 +127,6 @@ html {
 
 .key_hint--black {
   color: hsl(0, 0%, 100%);
-}
-
-.black_key:hover .key_hint--black,
-.black_key--hover .key_hint--black {
-  color: hsl(0, 0%, 50%);
 }
 
 @media (min-width: 540px) {
