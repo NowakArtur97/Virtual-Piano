@@ -61,6 +61,10 @@ html {
   transform: translateY(0);
 }
 
+.key .key_hint {
+  transition: color 0.5s, transform 0.5s 0s, opacity 0.5s 0s;
+}
+
 .key:hover .key_hint,
 .key--hover .key_hint {
   color: hsl(0, 0%, 50%);
