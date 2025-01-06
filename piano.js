@@ -6,6 +6,30 @@ document.addEventListener("DOMContentLoaded", () => {
     const audio = document.querySelector(`audio[data-key="${key}"]`);
     if (!audio) return;
     handleAnimation(element);
+    playAudio(audio);
+  }
+
+  function loadSample() {
+    console.log("loadSample");
+  }
+
+  function playNextSound() {
+    console.log("playNextSound");
+  }
+
+  function startPlaying() {
+    console.log("startPlaying");
+  }
+
+  function handleRecording() {
+    console.log("handleRecording");
+  }
+
+  function clearRecording() {
+    console.log("clearRecording");
+  }
+
+  function playAudio(audio) {
     audio.pause();
     audio.currentTime = 0;
     audio.play();
@@ -30,4 +54,20 @@ document.addEventListener("DOMContentLoaded", () => {
     ...document.querySelectorAll(".white_key"),
     ...document.querySelectorAll(".black_key"),
   ].forEach((key) => key.addEventListener("click", play));
+
+  document
+    .querySelector("#sample_button")
+    .addEventListener("click", loadSample);
+  document
+    .querySelector("#play_next_button")
+    .addEventListener("click", playNextSound);
+  document
+    .querySelector("#start_button")
+    .addEventListener("click", startPlaying);
+  document
+    .querySelector("#record_button")
+    .addEventListener("click", handleRecording);
+  document
+    .querySelector("#clear_button")
+    .addEventListener("click", clearRecording);
 });
