@@ -1,4 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
+  let isRecording = false;
+  let startTime = new Date();
+  let recording = [];
+
+  const recordButton = document.querySelector("#record_button");
+
   function play(event) {
     const key = event.key || event.target.getAttribute("data-key");
     const element = document.querySelector(`[data-key="${key}"]`);
@@ -7,26 +13,36 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!audio) return;
     handleAnimation(element);
     playAudio(audio);
+    if (isRecording) addRecord(element.getAttribute("data-index"));
+  }
+
+  function addRecord(index) {
+    if (!isRecording) return;
+    let endTime = new Date();
+    const record = { index, time: endTime - startTime };
+    recording.push(record);
   }
 
   function loadSample() {
-    console.log("loadSample");
+    // TODO
   }
 
   function playNextSound() {
-    console.log("playNextSound");
+    // TODO
   }
 
   function startPlaying() {
-    console.log("startPlaying");
+    // TODO
   }
 
   function handleRecording() {
-    console.log("handleRecording");
+    isRecording = !isRecording;
+    startTime = new Date();
+    recordButton.textContent = isRecording ? "Stop" : "Record";
   }
 
   function clearRecording() {
-    console.log("clearRecording");
+    recording = [];
   }
 
   function playAudio(audio) {
@@ -64,9 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document
     .querySelector("#start_button")
     .addEventListener("click", startPlaying);
-  document
-    .querySelector("#record_button")
-    .addEventListener("click", handleRecording);
+  recordButton.addEventListener("click", handleRecording);
   document
     .querySelector("#clear_button")
     .addEventListener("click", clearRecording);
