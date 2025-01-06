@@ -11,7 +11,7 @@ html {
 
 .container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   height: 100vh;
   width: 100vw;
@@ -24,6 +24,7 @@ html {
   display: flex;
   height: 160px;
   width: 320px;
+  margin-top: 15vh;
   background-color: hsl(0, 0%, 0%);
 }
 
@@ -136,10 +137,47 @@ html {
   color: hsl(0, 0%, 100%);
 }
 
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  width: 320px;
+  margin-top: 2vh;
+}
+
+.control_button {
+  padding: 1% 2.5%;
+  border: 0.1rem solid hsl(0, 0%, 100%);
+  border-radius: 4px;
+  background-color: transparent;
+
+  color: hsl(0, 0%, 100%);
+  font-size: 1em;
+
+  transition: 0.5s;
+}
+
+.control_button:hover {
+  background-color: hsl(0, 0%, 100%);
+  color: hsl(0, 0%, 0%);
+  transform: scale(1.25);
+}
+
+@media (orientation: portrait) {
+  .piano {
+    margin-top: 25vh;
+  }
+}
+
 @media (min-width: 540px) {
   .piano {
-    height: 240px;
-    width: 480px;
+    height: 200px;
+    width: 400px;
+  }
+
+  .buttons {
+    width: 400px;
   }
 }
 
@@ -149,8 +187,13 @@ html {
     width: 640px;
   }
 
-  .key_hint {
+  .key_hint,
+  .control_button {
     font-size: 1.5em;
+  }
+
+  .buttons {
+    width: 640px;
   }
 }
 
@@ -160,7 +203,8 @@ html {
     width: 960px;
   }
 
-  .key_hint {
+  .key_hint,
+  .control_button {
     font-size: 2em;
   }
 
@@ -173,5 +217,9 @@ html {
   .black_key:active,
   .black_key--active {
     border-bottom-width: 8px;
+  }
+
+  .buttons {
+    width: 960px;
   }
 }
