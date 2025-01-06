@@ -12,11 +12,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function handleAnimation(keyElement) {
-    const keyColorClass = keyElement.classList[0];
+    const keyColorClass = keyElement.classList[1];
+    keyElement.classList.add(`key--active`);
     keyElement.classList.add(`${keyColorClass}--active`);
+    keyElement.classList.add(`key--hover`);
     keyElement.classList.add(`${keyColorClass}--hover`);
     setTimeout(() => {
+      keyElement.classList.remove(`key--active`);
       keyElement.classList.remove(`${keyColorClass}--active`);
+      keyElement.classList.remove(`key--hover`);
       keyElement.classList.remove(`${keyColorClass}--hover`);
     }, 500);
   }
