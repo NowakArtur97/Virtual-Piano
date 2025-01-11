@@ -1,26 +1,28 @@
 document.addEventListener("DOMContentLoaded", () => {
   let isRecording = false;
+  let isPlaying = false;
   let startTime = new Date();
   let recording = [];
 
   const recordButton = document.querySelector("#record_button");
+  const startButton = document.querySelector("#start_button");
 
-  function play(event) {
-    const key = event.key || event.target.getAttribute("data-key");
+  function play(key) {
     const element = document.querySelector(`[data-key="${key}"]`);
     if (!element) return;
     const audio = document.querySelector(`audio[data-key="${key}"]`);
     if (!audio) return;
     handleAnimation(element);
     playAudio(audio);
-    if (isRecording) addRecord(element.getAttribute("data-index"));
+    if (isRecording) addRecord(key);
   }
 
-  function addRecord(index) {
+  function addRecord(key) {
     if (!isRecording) return;
     let endTime = new Date();
-    const record = { index, time: endTime - startTime };
+    const record = { key, time: endTime - startTime };
     recording.push(record);
+    console.log(record);
   }
 
   function loadSample() {
@@ -32,7 +34,19 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function startPlaying() {
-    // TODO
+    if (isRecording) handleRecording();
+    isPlaying = !isPlaying;
+    startButton.textContent = isPlaying ? "Stop" : "Start";
+    if (recording.length === 0 || !isPlaying) return;
+    recording.forEach(({ key, time }) => {
+      setTimeout(() => {
+        play(key);
+        console.log(key);
+      }, time);
+    });
+    setTimeout(() => {
+      isPlaying = false;
+    }, recording[recording.length - 1].time);
   }
 
   function handleRecording() {
@@ -65,11 +79,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 500);
   }
 
-  document.addEventListener("keydown", play);
+  document.addEventListener("keydown", (event) => {
+    play(event.key);
+  });
   [
     ...document.querySelectorAll(".white_key"),
     ...document.querySelectorAll(".black_key"),
-  ].forEach((key) => key.addEventListener("click", play));
+  ].forEach((key) =>
+    key.addEventListener("click", (event) => {
+      play(event.target.getAttribute("data-key"));
+    })
+  );
 
   document
     .querySelector("#sample_button")
@@ -77,9 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document
     .querySelector("#play_next_button")
     .addEventListener("click", playNextSound);
-  document
-    .querySelector("#start_button")
-    .addEventListener("click", startPlaying);
+  startButton.addEventListener("click", startPlaying);
   recordButton.addEventListener("click", handleRecording);
   document
     .querySelector("#clear_button")
