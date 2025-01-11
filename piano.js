@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   let isRecording = false;
   let isPlaying = false;
-  let startTime = new Date();
+  let startTime = null;
   let recording = [];
+  let timeouts = [];
 
   const recordButton = document.querySelector("#record_button");
   const startButton = document.querySelector("#start_button");
@@ -35,28 +36,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function startPlaying() {
     if (isRecording) handleRecording();
+    if (recording.length === 0) return;
     isPlaying = !isPlaying;
     startButton.textContent = isPlaying ? "Stop" : "Start";
-    if (recording.length === 0 || !isPlaying) return;
-    recording.forEach(({ key, time }) => {
-      setTimeout(() => {
-        play(key);
-        console.log(key);
-      }, time);
-    });
-    setTimeout(() => {
-      isPlaying = false;
-    }, recording[recording.length - 1].time);
+    if (isPlaying) {
+      recording.forEach(({ key, time }) => {
+        timeouts.push(
+          setTimeout(() => {
+            play(key);
+            console.log(key);
+          }, time)
+        );
+      });
+      timeouts.push(
+        setTimeout(() => {
+          isPlaying = false;
+          tartButton.textContent = "Stop";
+        }, recording[recording.length - 1].time)
+      );
+    } else {
+      timeouts.forEach((timeout) => clearTimeout(timeout));
+    }
   }
 
   function handleRecording() {
     isRecording = !isRecording;
-    startTime = new Date();
+    if (startTime === null) startTime = new Date();
     recordButton.textContent = isRecording ? "Stop" : "Record";
   }
 
   function clearRecording() {
     recording = [];
+    startTime === null;
   }
 
   function playAudio(audio) {
