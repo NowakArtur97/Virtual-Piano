@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let isRecording = false;
   let isPlaying = false;
   let startTime = null;
+  let pauses = [0];
   let recording = [];
   let timeouts = [];
 
@@ -15,13 +16,16 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!audio) return;
     handleAnimation(element);
     playAudio(audio);
-    if (isRecording) addRecord(key);
+    addRecord(key);
   }
 
   function addRecord(key) {
     if (!isRecording) return;
-    let endTime = new Date();
-    const record = { key, time: endTime - startTime };
+    const time =
+      new Date() -
+      startTime +
+      pauses.reduce((pauseA, pauseB) => pauseA + pauseB, 0);
+    const record = { key, time };
     recording.push(record);
     console.log(record);
   }
@@ -40,7 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
     isPlaying = !isPlaying;
     startButton.textContent = isPlaying ? "Stop" : "Start";
     if (isPlaying) {
-      recording.forEach(({ key, time }) => {
+      recording.forEach((record) => {
+        const { key, time } = record;
         timeouts.push(
           setTimeout(() => {
             play(key);
@@ -51,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
       timeouts.push(
         setTimeout(() => {
           isPlaying = false;
-          tartButton.textContent = "Stop";
+          startButton.textContent = "Start";
         }, recording[recording.length - 1].time)
       );
     } else {
@@ -61,13 +66,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function handleRecording() {
     isRecording = !isRecording;
-    if (startTime === null) startTime = new Date();
+    if (isRecording) {
+      startTime = new Date();
+    } else {
+      pauses.push(new Date() - startTime);
+    }
     recordButton.textContent = isRecording ? "Stop" : "Record";
   }
 
   function clearRecording() {
     recording = [];
-    startTime === null;
+    startTime = null;
+    pauses = [0];
   }
 
   function playAudio(audio) {
