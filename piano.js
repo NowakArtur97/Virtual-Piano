@@ -47,14 +47,15 @@ document.addEventListener("DOMContentLoaded", () => {
   let isRecording = false;
   let isPlaying = false;
   let startTime = null;
-  let pauses = [0];
   let recording = [];
+  let pauses = [0];
   let timeouts = [];
+  let currentRecordIndex = 0;
 
   const recordButton = document.querySelector("#record_button");
   const startButton = document.querySelector("#start_button");
 
-  function play(key) {
+  function playKey(key) {
     const element = document.querySelector(`[data-key="${key}"]`);
     if (!element) return;
     const audio = document.querySelector(`audio[data-key="${key}"]`);
@@ -81,7 +82,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function playNextSound() {
-    // TODO
+    if (currentRecordIndex === 0) {
+      playRecord();
+      currentRecordIndex++;
+    } else {
+      if (currentRecordIndex >= recording.length) currentRecordIndex = 0;
+      playRecord();
+      currentRecordIndex++;
+    }
   }
 
   function startPlaying() {
@@ -90,14 +98,10 @@ document.addEventListener("DOMContentLoaded", () => {
     isPlaying = !isPlaying;
     startButton.textContent = isPlaying ? "Stop" : "Start";
     if (isPlaying) {
-      recording.forEach((record) => {
-        const { key, time } = record;
-        timeouts.push(
-          setTimeout(() => {
-            play(key);
-          }, time)
-        );
-      });
+      currentRecordIndex = 0;
+      for (; currentRecordIndex < recording.length; currentRecordIndex++) {
+        playRecord();
+      }
       timeouts.push(
         setTimeout(() => {
           isPlaying = false;
@@ -107,6 +111,17 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       timeouts.forEach((timeout) => clearTimeout(timeout));
     }
+  }
+
+  function playRecord() {
+    const record = recording[currentRecordIndex];
+    const { key, time } = record;
+    console.log(key);
+    timeouts.push(
+      setTimeout(() => {
+        playKey(key);
+      }, time)
+    );
   }
 
   function handleRecording() {
@@ -123,6 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
     recording = [];
     startTime = null;
     pauses = [0];
+    currentRecordIndex = 0;
   }
 
   function playAudio(audio) {
@@ -145,15 +161,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 500);
   }
 
-  document.addEventListener("keydown", (event) => {
-    play(event.key);
-  });
+  document.addEventListener("keydown", ({ key }) => playKey(key));
   [
     ...document.querySelectorAll(".white_key"),
     ...document.querySelectorAll(".black_key"),
   ].forEach((key) =>
     key.addEventListener("click", (event) => {
-      play(event.target.getAttribute("data-key"));
+      playKey(event.target.getAttribute("data-key"));
     })
   );
 
