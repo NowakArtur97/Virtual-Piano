@@ -1,4 +1,49 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const SAMPLE_RECORDING = [
+    { key: "q", time: 3 * 150 },
+    { key: "q", time: 3 * 265 },
+    { key: "t", time: 3 * 380 },
+    { key: "t", time: 3 * 501 },
+    { key: "y", time: 3 * 625 },
+    { key: "y", time: 3 * 748 },
+    { key: "t", time: 3 * 871 },
+    { key: "r", time: 3 * 1126 },
+    { key: "r", time: 3 * 1247 },
+    { key: "e", time: 3 * 1365 },
+    { key: "e", time: 3 * 1477 },
+    { key: "w", time: 3 * 1597 },
+    { key: "w", time: 3 * 1714 },
+    { key: "q", time: 3 * 1837 },
+    { key: "t", time: 3 * 2092 },
+    { key: "t", time: 3 * 2212 },
+    { key: "r", time: 3 * 2332 },
+    { key: "r", time: 3 * 2457 },
+    { key: "e", time: 3 * 2572 },
+    { key: "e", time: 3 * 2692 },
+    { key: "w", time: 3 * 2812 },
+    { key: "t", time: 3 * 3092 },
+    { key: "t", time: 3 * 3212 },
+    { key: "r", time: 3 * 3332 },
+    { key: "r", time: 3 * 3457 },
+    { key: "e", time: 3 * 3572 },
+    { key: "e", time: 3 * 3692 },
+    { key: "w", time: 3 * 3812 },
+    { key: "q", time: 3 * 4050 },
+    { key: "q", time: 3 * 4205 },
+    { key: "t", time: 3 * 4330 },
+    { key: "t", time: 3 * 4451 },
+    { key: "y", time: 3 * 4575 },
+    { key: "y", time: 3 * 4698 },
+    { key: "t", time: 3 * 4821 },
+    { key: "r", time: 3 * 5076 },
+    { key: "r", time: 3 * 5197 },
+    { key: "e", time: 3 * 5315 },
+    { key: "e", time: 3 * 5427 },
+    { key: "w", time: 3 * 5547 },
+    { key: "w", time: 3 * 5667 },
+    { key: "q", time: 3 * 5787 },
+  ];
+
   let isRecording = false;
   let isPlaying = false;
   let startTime = null;
@@ -31,7 +76,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function loadSample() {
-    // TODO
+    recording = SAMPLE_RECORDING;
+    startPlaying();
   }
 
   function playNextSound() {
@@ -49,7 +95,6 @@ document.addEventListener("DOMContentLoaded", () => {
         timeouts.push(
           setTimeout(() => {
             play(key);
-            console.log(key);
           }, time)
         );
       });
