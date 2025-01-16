@@ -28,6 +28,10 @@ html {
   background-color: hsl(0, 0%, 0%);
 }
 
+.piano:hover {
+  cursor: pointer;
+}
+
 .keys {
   display: flex;
   justify-content: space-between;
@@ -162,6 +166,7 @@ html {
   background-color: hsl(0, 0%, 100%);
   color: hsl(0, 0%, 0%);
   transform: scale(1.25);
+  cursor: pointer;
 }
 
 @media (orientation: portrait) {
