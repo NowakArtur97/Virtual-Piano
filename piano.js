@@ -82,14 +82,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function playNextSound() {
-    if (currentRecordIndex === 0) {
-      playRecord();
-      currentRecordIndex++;
-    } else {
-      if (currentRecordIndex >= recording.length) currentRecordIndex = 0;
-      playRecord();
-      currentRecordIndex++;
-    }
+    if (recording.length === 0) return;
+    if (currentRecordIndex >= recording.length) currentRecordIndex = 0;
+    const { key } = recording[currentRecordIndex];
+    playRecord(key, 0);
+    currentRecordIndex++;
   }
 
   function startPlaying() {
@@ -100,7 +97,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isPlaying) {
       currentRecordIndex = 0;
       for (; currentRecordIndex < recording.length; currentRecordIndex++) {
-        playRecord();
+        const record = recording[currentRecordIndex];
+        const { key, time } = record;
+        playRecord(key, time);
       }
       timeouts.push(
         setTimeout(() => {
@@ -113,10 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function playRecord() {
-    const record = recording[currentRecordIndex];
-    const { key, time } = record;
-    console.log(key);
+  function playRecord(key, time) {
     timeouts.push(
       setTimeout(() => {
         playKey(key);
@@ -126,11 +122,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function handleRecording() {
     isRecording = !isRecording;
-    if (isRecording) {
-      startTime = new Date();
-    } else {
-      pauses.push(new Date() - startTime);
-    }
+    if (isRecording) startTime = new Date();
+    else pauses.push(new Date() - startTime);
     recordButton.textContent = isRecording ? "Stop" : "Record";
   }
 
