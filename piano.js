@@ -143,21 +143,21 @@ document.addEventListener("DOMContentLoaded", () => {
   function handleAnimation(keyElement) {
     const keyColorClass = keyElement.classList[1];
     keyElement.classList.add(`key--active`);
-    keyElement.classList.add(`${keyColorClass}--active`);
+    keyElement.classList.add(`${keyColorClass}_active`);
     keyElement.classList.add(`key--hover`);
-    keyElement.classList.add(`${keyColorClass}--hover`);
+    keyElement.classList.add(`${keyColorClass}_hover`);
     setTimeout(() => {
       keyElement.classList.remove(`key--active`);
-      keyElement.classList.remove(`${keyColorClass}--active`);
+      keyElement.classList.remove(`${keyColorClass}_active`);
       keyElement.classList.remove(`key--hover`);
-      keyElement.classList.remove(`${keyColorClass}--hover`);
+      keyElement.classList.remove(`${keyColorClass}_hover`);
     }, 500);
   }
 
   document.addEventListener("keydown", ({ key }) => playKey(key));
   [
-    ...document.querySelectorAll(".white_key"),
-    ...document.querySelectorAll(".black_key"),
+    ...document.querySelectorAll(".key--white"),
+    ...document.querySelectorAll(".key--black"),
   ].forEach((key) =>
     key.addEventListener("click", (event) => {
       playKey(event.target.getAttribute("data-key"));

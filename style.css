@@ -52,7 +52,7 @@ html {
   transform-origin: top;
 }
 
-.key_hint {
+.key__hint {
   opacity: 0;
   font-size: 1em;
 
@@ -61,83 +61,88 @@ html {
   transform: translateY(-50%);
 }
 
-.piano:hover .key_hint {
+.piano:hover .key__hint {
   opacity: 1;
   transform: translateY(0);
 }
 
-.key .key_hint {
+.key .key__hint {
   transition: color 0.5s, transform 0.5s 0s, opacity 0.5s 0s;
 }
 
-.key:hover .key_hint,
-.key--hover .key_hint {
+.key:hover .key__hint,
+.key--hover .key__hint {
   color: hsl(0, 0%, 50%);
   transition: color 0.5s, transform 0.5s 0s, opacity 0.5s 0s;
 }
 
-.key:active .key_hint,
-.key--active .key_hint {
+.key:active .key__hint,
+.key--active .key__hint {
   opacity: 1;
   transform: translateY(0);
   transition: color 0.5s, transform 0.5s 0s, opacity 0.5s 0s;
 }
 
-.white_keys {
+.keys--white {
   align-items: center;
 }
 
-.white_key {
+.key--white {
   height: 100%;
   width: 6%;
 
   background-color: hsl(0, 0%, 100%);
 }
 
-.white_key:hover,
-.white_key--hover {
+.key--white:hover,
+.key--white_hover {
   background-color: hsl(0, 0%, 50%);
 }
 
-.key_hint--white {
+.key--white:active,
+.key--white_active {
+  transform: scaleY(101%);
+}
+
+.key__hint--white {
   color: hsl(0, 0%, 0%);
 }
 
-.black_keys {
+.keys--black {
   position: absolute;
   left: 3.5%;
   height: 50%;
 }
 
-.black_key {
+.key--black {
   width: 6%;
   background-color: hsl(0, 0%, 15%);
   border: 1px solid hsl(0, 0%, 0%);
   border-bottom-color: hsl(0, 0%, 30%);
 }
 
-.black_key:hover,
-.black_key--hover {
+.key--black:hover,
+.key--black_hover {
   background-color: hsl(0, 0%, 50%);
   border-color: hsl(0, 0%, 35%);
   border-bottom-color: hsl(0, 0%, 65%);
 }
 
-.black_key:active,
-.black_key--active {
+.key--black:active,
+.key--black_active {
   border-bottom-width: 4px;
   transform: scaleY(98%);
 }
 
-.black_key:nth-of-type(3),
-.black_key:nth-of-type(7),
-.black_key:nth-of-type(10),
-.black_key:nth-of-type(14),
-.black_key:nth-of-type(15) {
+.key--black:nth-of-type(3),
+.key--black:nth-of-type(7),
+.key--black:nth-of-type(10),
+.key--black:nth-of-type(14),
+.key--black:nth-of-type(15) {
   opacity: 0;
 }
 
-.key_hint--black {
+.key__hint--black {
   color: hsl(0, 0%, 100%);
 }
 
@@ -192,7 +197,7 @@ html {
     width: 640px;
   }
 
-  .key_hint,
+  .key__hint,
   .control_button {
     font-size: 1.5em;
   }
@@ -208,19 +213,19 @@ html {
     width: 960px;
   }
 
-  .key_hint,
+  .key__hint,
   .control_button {
     font-size: 2em;
   }
 
-  .white_key,
-  .black_key {
+  .key--white,
+  .key--black {
     border-width: 0px 6px 9px;
     border-radius: 0px 0px 10px 10px;
   }
 
-  .black_key:active,
-  .black_key--active {
+  .key--black:active,
+  .key--black_active {
     border-bottom-width: 8px;
   }
 
