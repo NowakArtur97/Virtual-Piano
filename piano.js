@@ -54,6 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const recordButton = document.querySelector("#record_button");
   const startButton = document.querySelector("#start_button");
+  const notes = document.querySelector(".notes");
 
   function playKey(key) {
     const element = document.querySelector(`[data-key="${key}"]`);
@@ -62,11 +63,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!audio) return;
     handleAnimation(element);
     playAudio(audio);
-    addRecord(key);
+    if (!isRecording) return;
+    const record = addRecord(key);
+    displayNote(record);
   }
 
   function addRecord(key) {
-    if (!isRecording) return;
     const time =
       new Date() -
       startTime +
@@ -74,6 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const record = { key, time };
     recording.push(record);
     console.log(record);
+    return record;
   }
 
   function loadSample() {
@@ -132,6 +135,21 @@ document.addEventListener("DOMContentLoaded", () => {
     startTime = null;
     pauses = [0];
     currentRecordIndex = 0;
+  }
+
+  function displayNote(record) {
+    const { key, time } = record;
+    const note = document.createElement("div");
+    note.classList.add("note");
+    const noteKey = document.createElement("div");
+    noteKey.classList.add("note__key");
+    noteKey.textContent = key;
+    const noteTime = document.createElement("div");
+    noteTime.classList.add("note__time");
+    noteTime.textContent = time;
+    note.appendChild(noteKey);
+    note.appendChild(noteTime);
+    notes.appendChild(note);
   }
 
   function playAudio(audio) {
