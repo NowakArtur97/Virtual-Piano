@@ -135,6 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
     startTime = null;
     pauses = [0];
     currentRecordIndex = 0;
+    notes.replaceChildren();
   }
 
   function displayNote(record) {
