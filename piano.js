@@ -65,8 +65,8 @@ document.addEventListener("DOMContentLoaded", () => {
     playAudio(audio);
     if (!isRecording) return;
     const record = addRecord(key);
-    const noteElement = displayNote(record);
-    handleNoteAnimation(noteElement);
+    displayNote(record);
+    handleNoteAnimation(record.time);
   }
 
   function addRecord(key) {
@@ -88,8 +88,9 @@ document.addEventListener("DOMContentLoaded", () => {
   function playNextSound() {
     if (recording.length === 0) return;
     if (currentRecordIndex >= recording.length) currentRecordIndex = 0;
-    const { key } = recording[currentRecordIndex];
+    const { key, time } = recording[currentRecordIndex];
     playRecord(key, 0);
+    handleNoteAnimation(time);
     currentRecordIndex++;
   }
 
@@ -120,6 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
     timeouts.push(
       setTimeout(() => {
         playKey(key);
+        handleNoteAnimation(time);
       }, time)
     );
   }
@@ -156,7 +158,6 @@ document.addEventListener("DOMContentLoaded", () => {
     note.appendChild(noteKey);
     note.appendChild(noteTime);
     notes.appendChild(note);
-    return note;
   }
 
   function playAudio(audio) {
@@ -179,7 +180,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 500);
   }
 
-  function handleNoteAnimation(noteElement) {
+  function handleNoteAnimation(time) {
+    const noteTime = [...document.querySelectorAll(".note__time")].find(
+      (el) => +el.textContent === time
+    );
+    if (noteTime === undefined) return;
+    const noteElement = noteTime.parentElement;
     noteElement.classList.add(`note--hover`);
     setTimeout(() => {
       noteElement.classList.remove(`note--hover`);
