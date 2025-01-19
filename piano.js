@@ -81,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function loadSample() {
+    clearRecording();
     recording = SAMPLE_RECORDING;
     recording.forEach(displayNote);
     startPlaying();
