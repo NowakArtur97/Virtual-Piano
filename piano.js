@@ -144,6 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
     startTime = null;
     pauses = [0];
     currentRecordIndex = 0;
+    timeouts.forEach((timeout) => clearTimeout(timeout));
     notes.replaceChildren();
   }
 
