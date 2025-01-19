@@ -196,6 +196,8 @@ body {
   transition: 0.5s;
 }
 
+.note:hover,
+.note--hover {
   background-color: hsl(0, 0%, 100%);
   color: hsl(0, 0%, 0%);
   transform: scale(1.125);

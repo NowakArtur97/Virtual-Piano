@@ -61,11 +61,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!element) return;
     const audio = document.querySelector(`audio[data-key="${key}"]`);
     if (!audio) return;
-    handleAnimation(element);
+    handleKeyAnimation(element);
     playAudio(audio);
     if (!isRecording) return;
     const record = addRecord(key);
-    displayNote(record);
+    const noteElement = displayNote(record);
+    handleNoteAnimation(noteElement);
   }
 
   function addRecord(key) {
@@ -155,6 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
     note.appendChild(noteKey);
     note.appendChild(noteTime);
     notes.appendChild(note);
+    return note;
   }
 
   function playAudio(audio) {
@@ -163,7 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
     audio.play();
   }
 
-  function handleAnimation(keyElement) {
+  function handleKeyAnimation(keyElement) {
     const keyColorClass = keyElement.classList[1];
     keyElement.classList.add(`key--active`);
     keyElement.classList.add(`${keyColorClass}_active`);
@@ -174,6 +176,13 @@ document.addEventListener("DOMContentLoaded", () => {
       keyElement.classList.remove(`${keyColorClass}_active`);
       keyElement.classList.remove(`key--hover`);
       keyElement.classList.remove(`${keyColorClass}_hover`);
+    }, 500);
+  }
+
+  function handleNoteAnimation(noteElement) {
+    noteElement.classList.add(`note--hover`);
+    setTimeout(() => {
+      noteElement.classList.remove(`note--hover`);
     }, 500);
   }
 
