@@ -131,6 +131,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function clearRecording() {
+    if (isRecording) {
+      isRecording = false;
+      recordButton.textContent = "Record";
+    }
     recording = [];
     startTime = null;
     pauses = [0];
