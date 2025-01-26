@@ -1,0 +1,33 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Virtual Piano Template
+Parameters:
+  VirtualPianoWebsiteBucketName:
+    Type: String
+    Description: S3 Bucket name for virtual piano website
+    Default: virtual-piano
+Resources:
+  VirtualPianoWebsiteS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref VirtualPianoWebsiteBucketName
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: ObjectWriter
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: index.html
+  VirtualPianoWebsiteS3BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref VirtualPianoWebsiteS3Bucket
+      PolicyDocument:
+        Id: VirtualPianoWebsiteS3BucketPolicy
+        Version: 2012-10-17
+        Statement:
+          - Sid: PublicReadForGetBucketObjects
+            Effect: Allow
+            Principal: "*"
+            Action: "s3:GetObject"
+            Resource: !Sub "arn:aws:s3:::${VirtualPianoWebsiteS3Bucket}/*"
