@@ -77,7 +77,7 @@ Resources:
   GitHubToS3LambdaFunction:
     Type: AWS::Lambda::Function
     Properties:
-      Runtime: python3.9
+      Runtime: python3.13
       Timeout: 120
       Handler: index.lambda_handler
       Role: !GetAtt GitHubToS3LambdaRole.Arn
@@ -194,7 +194,7 @@ Resources:
   S3BucketCleanerLambdaFunction:
     Type: AWS::Lambda::Function
     Properties:
-      Runtime: python3.9
+      Runtime: python3.13
       Timeout: 60
       Handler: index.lambda_handler
       Role: !GetAtt S3BucketCleanerLambdaRole.Arn
