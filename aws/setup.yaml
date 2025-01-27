@@ -12,7 +12,7 @@ Parameters:
   FilesToCopyFromGitHub:
     Type: String
     Description: Virtual piano website files to copy from GitHub
-    Default: index.html,style.css,piano.js,sounds/1.wav,sounds/1.5.wav,sounds/2.wav,sounds/2.5.wav,sounds/3.wav,sounds/4.wav,sounds/4.5.wav,sounds/5.wav,sounds/5.5.wav,sounds/6.wav,sounds/6.5.wav,sounds/7.wav,sounds/8.wav,sounds/8.5.wav,sounds/9.wav,sounds/9.5.wav,sounds/10.wav,sounds/11.wav,sounds/11.5.wav,sounds/12.wav,sounds/12.5.wav,sounds/13.wav,sounds/13.5.wav,sounds/14.wav,sounds/15.wav,
+    Default: index.html,style.css,piano.js,sounds/1.wav,sounds/1.5.wav,sounds/2.wav,sounds/2.5.wav,sounds/3.wav,sounds/4.wav,sounds/4.5.wav,sounds/5.wav,sounds/5.5.wav,sounds/6.wav,sounds/6.5.wav,sounds/7.wav,sounds/8.wav,sounds/8.5.wav,sounds/9.wav,sounds/9.5.wav,sounds/10.wav,sounds/11.wav,sounds/11.5.wav,sounds/12.wav,sounds/12.5.wav,sounds/13.wav,sounds/13.5.wav,sounds/14.wav,sounds/15.wav
 Resources:
   VirtualPianoWebsiteS3Bucket:
     Type: AWS::S3::Bucket
