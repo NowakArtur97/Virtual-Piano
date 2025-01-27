@@ -16,10 +16,10 @@ def save_to_local(url):
     urllib.request.urlretrieve(url, filePath)
     return filePath
 
-def copy_to_s3(url, contentType):
+def copy_to_s3(url, folder, contentType):
     filePath = save_to_local(url)
     fileName = os.path.basename(filePath)
-    s3.Object(BUCKET_NAME, fileName).put(Body=open(filePath, 'rb'), ContentType=contentType)
+    s3.Object(BUCKET_NAME, folder + fileName).put(Body=open(filePath, 'rb'), ContentType=contentType)
 
 def resolve_content_type(file):
     extension = file.split(".")[1]
@@ -63,8 +63,9 @@ def lambda_handler(event, context):
                 fileOnGitHub = GITHUB_URL + "/" + fileToCopy
                 print("File to copy: " + fileToCopy)
                 print("URL to file: " + fileOnGitHub)
+                folder = fileToCopy[:fileToCopy.rfind("/")] + '/' if '/' in fileToCopy else ''
                 contentType = resolve_content_type(fileToCopy)
-                copy_to_s3(fileOnGitHub, contentType)
+                copy_to_s3(fileOnGitHub, folder, contentType)
                 print("Successfully copied file: " + fileToCopy + " to bucket: " + BUCKET_NAME)
         cfnresponse.send(event, context, cfnresponse.SUCCESS, responseData)
     except Exception as e:

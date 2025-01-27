@@ -8,12 +8,11 @@ Parameters:
   GitHubRepositoryURL:
     Type: String
     Description: URL for GitHub repository with virtual piano website files
-    # TODO: Change to main brunch
-    Default: https://raw.githubusercontent.com/NowakArtur97/Virtual-Piano/refs/heads/virtual-piano
+    Default: https://raw.githubusercontent.com/NowakArtur97/Virtual-Piano/main
   FilesToCopyFromGitHub:
     Type: String
     Description: Virtual piano website files to copy from GitHub
-    Default: index.html,style.css,piano.js,sounds/1.wav,sounds/1.5.wav
+    Default: index.html,style.css,piano.js,sounds/1.wav,sounds/1.5.wav,sounds/2.wav,sounds/2.5.wav,sounds/3.wav,sounds/4.wav,sounds/4.5.wav,sounds/5.wav,sounds/5.5.wav,sounds/6.wav,sounds/6.5.wav,sounds/7.wav,sounds/8.wav,sounds/8.5.wav,sounds/9.wav,sounds/9.5.wav,sounds/10.wav,sounds/11.wav,sounds/11.5.wav,sounds/12.wav,sounds/12.5.wav,sounds/13.wav,sounds/13.5.wav,sounds/14.wav,sounds/15.wav,
 Resources:
   VirtualPianoWebsiteS3Bucket:
     Type: AWS::S3::Bucket
@@ -106,10 +105,10 @@ Resources:
               urllib.request.urlretrieve(url, filePath)
               return filePath
 
-          def copy_to_s3(url, contentType):
+          def copy_to_s3(url, folder, contentType):
               filePath = save_to_local(url)
               fileName = os.path.basename(filePath)
-              s3.Object(BUCKET_NAME, fileName).put(Body=open(filePath, 'rb'), ContentType=contentType)
+              s3.Object(BUCKET_NAME, folder + fileName).put(Body=open(filePath, 'rb'), ContentType=contentType)
 
           def resolve_content_type(file):
               extension = file.split(".")[1]
@@ -153,8 +152,9 @@ Resources:
                           fileOnGitHub = GITHUB_URL + "/" + fileToCopy
                           print("File to copy: " + fileToCopy)
                           print("URL to file: " + fileOnGitHub)
+                          folder = fileToCopy[:fileToCopy.rfind("/")] + '/' if '/' in fileToCopy else ''
                           contentType = resolve_content_type(fileToCopy)
-                          copy_to_s3(fileOnGitHub, contentType)
+                          copy_to_s3(fileOnGitHub, folder, contentType)
                           print("Successfully copied file: " + fileToCopy + " to bucket: " + BUCKET_NAME)
                   cfnresponse.send(event, context, cfnresponse.SUCCESS, responseData)
               except Exception as e:
